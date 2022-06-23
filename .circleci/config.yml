@@ -6,7 +6,6 @@ version: 2.1
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
   build:
-
     docker:
       - image: circleci/node:13.8.0
     steps:
@@ -19,7 +18,7 @@ jobs:
       - run:
           name: npm run lint
           command: npm lint
-      
+
       - run:
           name: Run Tests
           command: npm run test
@@ -41,14 +40,13 @@ jobs:
       - checkout
       - run: npm audit
 
-
 workflows:
   orb-free-workflow:
     jobs:
       - build
-      - test
-          requires: 
+      - test:
+          requires:
             - build
-      - analayse
-          requires: 
+      - analayse:
+          requires:
             - test
